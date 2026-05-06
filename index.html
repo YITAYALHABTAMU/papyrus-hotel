@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Papyrus Hotel | Member Portal</title>
+  <title>Papyrus Hotel | VIP Member Portal</title>
   
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#0F0F0F">
@@ -23,13 +23,12 @@
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
     body { margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); padding-bottom: 90px; }
 
-    /* Security Gate */
+    /* Login Gate */
     #login-gate { position:fixed; top:0; left:0; width:100%; height:100%; background:#000; z-index:10000; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:30px; }
     .login-box { width:100%; max-width:320px; text-align:center; }
-    .login-input { width:100%; padding:15px; background:#111; border:1px solid #333; color:white; border-radius:4px; margin-bottom:12px; outline:none; transition: 0.3s; }
-    .login-input:focus { border-color: var(--gold); }
+    .login-input { width:100%; padding:15px; background:#111; border:1px solid #333; color:white; border-radius:4px; margin-bottom:12px; outline:none; font-size: 16px; }
 
-    /* General Layout */
+    /* Layout */
     .topbar { background: #000; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--gold); position: sticky; top: 0; z-index: 100; }
     .brand { color: var(--gold); font-weight: bold; letter-spacing: 3px; text-transform: uppercase; font-family: serif; }
     .container { padding: 20px; max-width: 500px; margin: 0 auto; }
@@ -40,24 +39,16 @@
     /* Components */
     .section-title { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin: 25px 0 15px 0; border-bottom: 1px solid #333; padding-bottom: 5px; }
     .card { background: var(--card); border-radius: 8px; padding: 15px; margin-bottom: 12px; border-left: 3px solid var(--gold); display: flex; justify-content: space-between; align-items: center; }
-    .price { color: var(--gold); font-weight: bold; font-size: 14px; }
-    .btn-gold { background: var(--gold); color: #000; border: none; padding: 10px 16px; border-radius: 4px; font-weight: bold; cursor: pointer; text-transform: uppercase; font-size: 11px; }
+    .bank-card { background: #111; border: 1px solid var(--gold); padding: 15px; border-radius: 8px; }
+    .btn-gold { background: var(--gold); color: #000; border: none; padding: 10px 16px; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 11px; text-transform: uppercase; }
     
-    /* Timer Overlay */
-    .overlay { background: #000; padding: 30px; border-radius: 12px; border: 1px solid var(--gold); text-align: center; }
-    .clock { font-size: 48px; font-weight: bold; color: var(--gold); margin: 20px 0; }
-
-    /* Navigation */
     .bottom-nav { position: fixed; bottom: 0; width: 100%; background: #000; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid var(--gold); z-index: 200; }
     .nav-item { color: var(--text-dim); text-align: center; font-size: 10px; cursor: pointer; flex: 1; }
     .nav-item.active { color: var(--gold); font-weight: bold; }
-    
-    .bank-card { background: #111; border: 1px solid var(--gold); padding: 15px; border-radius: 8px; }
   </style>
 </head>
 <body>
 
-<!-- 1. LOGIN SCREEN WITH INVITATION -->
 <div id="login-gate">
   <div class="login-box">
     <div style="color:var(--gold); font-family:serif; font-size:32px; letter-spacing:5px; margin-bottom:30px;">PAPYRUS</div>
@@ -65,7 +56,7 @@
     <input type="password" id="p" placeholder="Access Code" class="login-input">
     <input type="text" id="inv" placeholder="Invitation Code" class="login-input">
     <button onclick="login()" class="btn-gold" style="width:100%; padding:18px; margin-top:10px;">Authorize Entry</button>
-    <p id="err" style="color:var(--error); font-size:12px; margin-top:20px; display:none;">Unauthorized: Invalid Credentials</p>
+    <p id="err" style="color:var(--error); font-size:12px; margin-top:20px; display:none;">Unauthorized Member Access</p>
   </div>
 </div>
 
@@ -76,59 +67,77 @@
 
 <div class="container">
   
-  <!-- HOME PAGE -->
+  <!-- HOME -->
   <div id="home" class="tab-content active">
-    <div style="height:140px; background:linear-gradient(45deg, #000, #1a1a1a); border:1px solid var(--gold); border-radius:12px; display:flex; flex-direction:column; align-items:center; justify-content:center; margin-bottom:20px; text-align:center;">
-      <div style="color:var(--gold); font-size:10px; letter-spacing:3px;">EXCLUSIVE ACCESS</div>
-      <h3 style="color:var(--text); letter-spacing:1px; margin:5px 0;">WELCOME GUEST</h3>
+    <div style="height:140px; background:linear-gradient(45deg, #000, #111); border:1px solid var(--gold); border-radius:12px; display:flex; align-items:center; justify-content:center; text-align:center;">
+      <div>
+        <div style="color:var(--gold); font-size:10px; letter-spacing:3px;">MEMBERS ONLY</div>
+        <h3 style="margin:5px 0;">WELCOME GUEST</h3>
+      </div>
     </div>
-    <div class="section-title">Luxury Portfolio</div>
-    <div class="card"><div><strong>Fine Dining</strong><p style="font-size:11px; color:var(--text-dim);">Gala events up to 500k ETB</p></div></div>
-    <div class="card"><div><strong>VIP Services</strong><p style="font-size:11px; color:var(--text-dim);">Concierge & Private Wings</p></div></div>
+    <div class="section-title">Luxury Services</div>
+    <div class="card"><div><strong>Diamond Wing</strong><p style="font-size:11px; color:var(--text-dim);">Exclusive high-floor suites</p></div></div>
   </div>
 
-  <!-- TASKS PAGE -->
+  <!-- TASKS -->
   <div id="tasks" class="tab-content">
     <div id="task-list">
-      <div class="section-title">Available Reservations</div>
-      <div class="card"><div><strong>Diamond Wing</strong><br><span class="price">500,000 ETB</span></div><button class="btn-gold" onclick="startTask('Diamond Wing')">Book</button></div>
-      <div class="card"><div><strong>Grand Estate</strong><br><span class="price">400,000 ETB</span></div><button class="btn-gold" onclick="startTask('Grand Estate')">Book</button></div>
-      <div class="card"><div><strong>Presidential</strong><br><span class="price">100,000 ETB</span></div><button class="btn-gold" onclick="startTask('Presidential')">Book</button></div>
-      <div class="card"><div><strong>Standard</strong><br><span class="price">5,000 ETB</span></div><button class="btn-gold" onclick="startTask('Standard')">Book</button></div>
+      <div class="section-title">Active Reservation Tasks</div>
+      <div class="card"><div><strong>Diamond Wing</strong><br><span style="color:var(--gold); font-weight:bold;">500,000 ETB</span></div><button class="btn-gold" onclick="startTask('Diamond Wing')">Book</button></div>
     </div>
-
-    <!-- Timer Overlay -->
-    <div id="task-overlay" style="display:none;" class="overlay">
-      <div id="preview-box" style="height:180px; background:#111; border:1px solid #333; display:flex; align-items:center; justify-content:center; margin-bottom:15px; color:var(--gold);">
-        🎥 [ PREVIEWING VIDEO ]
-      </div>
-      <div id="task-status" style="font-size:12px; color:var(--text-dim);">Analyzing Suite Preview...</div>
-      <div id="timer" class="clock">5s</div>
+    <div id="task-overlay" style="display:none; text-align: center; background: #000; padding: 30px; border-radius: 12px; border: 1px solid var(--gold);">
+      <div style="height:180px; background:#111; border:1px solid #333; display:flex; align-items:center; justify-content:center; margin-bottom:15px; color:var(--gold);">🎥 PREVIEWING BED...</div>
+      <div id="timer" style="font-size: 48px; font-weight: bold; color: var(--gold); margin: 20px 0;">5s</div>
     </div>
   </div>
 
-  <!-- ME PAGE -->
+  <!-- ME -->
   <div id="me" class="tab-content">
-    <div class="section-title">Financial Profile</div>
+    <div class="section-title">Earning Wallet</div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px;">
+      <div class="bank-card" style="text-align: center;">
+        <div style="font-size: 10px; color: var(--gold);">BALANCE</div>
+        <div style="font-size: 18px; font-weight: bold; margin-top: 5px;">0.00 ETB</div>
+      </div>
+      <div class="bank-card" style="text-align: center; border-color: var(--success);">
+        <div style="font-size: 10px; color: var(--success);">COMMISSION</div>
+        <div style="font-size: 18px; font-weight: bold; margin-top: 5px;">0.00 ETB</div>
+      </div>
+    </div>
+
+    <div class="section-title">Payment Portal</div>
     <div class="bank-card">
-      <div style="margin-bottom:12px; border-bottom:1px solid #222; padding-bottom:5px; color:var(--gold); font-size:12px;">DEPOSIT RECIPIENT</div>
       <div style="display:flex; justify-content:space-between; margin-bottom:5px;"><span>Bank:</span><strong>CBE</strong></div>
       <div style="display:flex; justify-content:space-between; margin-bottom:5px;"><span>Name:</span><strong>Yitayal Habtamu</strong></div>
       <div style="display:flex; justify-content:space-between; margin-bottom:15px;"><span>Account:</span><strong>1000181873764</strong></div>
-      <button onclick="copyAcc()" style="width:100%; padding:8px; background:rgba(212,175,55,0.05); border:1px solid var(--gold); color:var(--gold); border-radius:4px; cursor:pointer; font-size:10px;">COPY ACCOUNT</button>
+      <button onclick="copyAcc()" style="width:100%; padding:10px; border:1px solid var(--gold); color:var(--gold); background:none; border-radius:4px; font-size:10px; cursor:pointer;">COPY ACCOUNT NUMBER</button>
     </div>
-    
-    <div class="section-title">Member Info</div>
-    <div class="card" style="flex-direction:column; align-items:flex-start;">
-      <span style="font-size:11px; color:var(--text-dim);">Invitation Code</span>
-      <strong style="color:var(--gold);">VIP2026</strong>
+
+    <div class="section-title">Settings & Invitations</div>
+    <div class="card" style="flex-direction: column; align-items: stretch; padding: 0;">
+        <!-- Invitation Link Sub-Section -->
+        <div style="padding: 15px; border-bottom: 1px solid #222;">
+            <div style="font-size: 11px; color: var(--text-dim); margin-bottom: 8px; text-transform: uppercase;">Your Invitation Link</div>
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <input type="text" readonly id="inviteLink" value="https://papyrus.hotel/VIP2026" style="flex-grow:1; background:#111; border:1px solid #333; color:var(--gold); padding:8px; border-radius:4px; font-size:12px;">
+                <button onclick="shareInvite()" class="btn-gold" style="padding: 8px 12px; font-size: 9px;">COPY</button>
+            </div>
+        </div>
+        <!-- Invitation Code -->
+        <div style="padding: 15px; border-bottom: 1px solid #222; display: flex; justify-content: space-between;">
+            <span style="font-size: 13px; color: var(--text-dim);">Invite Code</span>
+            <span style="font-size: 13px; color: var(--gold); font-weight: bold;">VIP2026</span>
+        </div>
+        <!-- Logout -->
+        <div style="padding: 15px; display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-size: 13px; color: var(--text-dim);">Security Session</span>
+            <button onclick="logout()" style="background:none; border:none; color:var(--error); font-weight:bold; cursor:pointer; font-size:13px; padding: 0;">LOGOUT</button>
+        </div>
     </div>
-    <button onclick="logout()" style="width:100%; padding:15px; background:none; border:1px solid var(--error); color:var(--error); border-radius:4px; cursor:pointer; margin-top:10px;">LOGOUT</button>
   </div>
 
 </div>
 
-<!-- BOTTOM NAVIGATION -->
 <div class="bottom-nav">
   <div class="nav-item active" onclick="tab('home', this)">🏠<br>Home</div>
   <div class="nav-item" onclick="tab('tasks', this)">📋<br>Tasks</div>
@@ -136,32 +145,27 @@
 </div>
 
 <script>
-  // Auth Credentials
-  const CONFIG = { u: 'papyrus', p: 'hotel2026', inv: 'VIP2026' };
+  const ACCESS = { u: 'papyrus', p: 'hotel2026', i: 'VIP2026' };
 
   function tab(id, el) {
     document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
     document.getElementById(id).classList.add('active');
     el.classList.add('active');
-    window.scrollTo(0,0);
   }
 
   function login() {
-    const user = document.getElementById('u').value;
-    const pass = document.getElementById('p').value;
-    const code = document.getElementById('inv').value;
-
-    if(user === CONFIG.u && pass === CONFIG.p && code === CONFIG.inv) {
-      localStorage.setItem('papyrus_auth', 'active');
+    const u = document.getElementById('u').value;
+    const p = document.getElementById('p').value;
+    const i = document.getElementById('inv').value;
+    if(u === ACCESS.u && p === ACCESS.p && i === ACCESS.i) {
+      localStorage.setItem('papyrus_member', 'true');
       document.getElementById('login-gate').style.display = 'none';
-    } else {
-      document.getElementById('err').style.display = 'block';
-    }
+    } else { document.getElementById('err').style.display = 'block'; }
   }
 
   function logout() {
-    localStorage.removeItem('papyrus_auth');
+    localStorage.removeItem('papyrus_member');
     location.reload();
   }
 
@@ -170,28 +174,11 @@
     document.getElementById('task-overlay').style.display = 'block';
     let time = 5;
     let clock = document.getElementById('timer');
-    
-    // Stage 1: 5s Video Preview
-    let vTimer = setInterval(() => {
-      time--;
-      clock.innerText = time + "s";
+    let videoPhase = setInterval(() => {
+      time--; clock.innerText = time + "s";
       if(time <= 0) {
-        clearInterval(vTimer);
-        document.getElementById('task-status').innerText = "Securing " + name + "...";
-        document.getElementById('task-status').style.color = "var(--gold)";
-        runBooking(30);
-      }
-    }, 1000);
-  }
-
-  function runBooking(time) {
-    let clock = document.getElementById('timer');
-    let bTimer = setInterval(() => {
-      time--;
-      clock.innerText = time + "s";
-      if(time <= 0) {
-        clearInterval(bTimer);
-        alert("Verification Complete! Transfer deposit to finalize.");
+        clearInterval(videoPhase);
+        alert("Booking Unlocked! Please visit the payment portal.");
         document.getElementById('task-overlay').style.display = 'none';
         document.getElementById('task-list').style.display = 'block';
         tab('me', document.querySelectorAll('.nav-item')[2]);
@@ -201,11 +188,19 @@
 
   function copyAcc() {
     navigator.clipboard.writeText('1000181873764');
-    alert("CBE Account Copied to Clipboard");
+    alert("CBE Account Number Copied!");
+  }
+
+  function shareInvite() {
+    const link = document.getElementById('inviteLink').value;
+    const text = `Join Papyrus Hotel VIP Portal.\nLink: ${link}\nCode: VIP2026`;
+    navigator.clipboard.writeText(text);
+    alert("Invitation link and code copied!");
   }
 
   window.onload = () => {
-    if(localStorage.getItem('papyrus_auth') === 'active') {
+    document.getElementById('inviteLink').value = window.location.href;
+    if(localStorage.getItem('papyrus_member') === 'true') {
       document.getElementById('login-gate').style.display = 'none';
     }
   }
