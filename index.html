@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Papyrus Hotel | Guest Portal</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0F0F0F">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <style>
+    :root { --gold: #D4AF37; --bg: #0F0F0F; --card: #1A1A1A; --text: #FFFFFF; --text-dim: #A8A8A8; }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    body { margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); padding-bottom: 90px; }
+    .topbar { background: #000; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--gold); position: sticky; top: 0; z-index: 100; }
+    .brand { color: var(--gold); font-weight: bold; letter-spacing: 2px; text-transform: uppercase; font-family: serif; }
+    .container { padding: 20px; max-width: 500px; margin: 0 auto; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; animation: fadeIn 0.3s; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .section-title { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin: 25px 0 10px 0; border-bottom: 1px solid #333; padding-bottom: 5px; }
+    .card { background: var(--card); border-radius: 8px; padding: 15px; margin-bottom: 12px; border-left: 3px solid var(--gold); display: flex; justify-content: space-between; align-items: center; }
+    .price { color: var(--gold); font-weight: bold; }
+    .btn-gold { background: var(--gold); color: #000; border: none; padding: 8px 14px; border-radius: 4px; font-weight: bold; font-size: 10px; cursor: pointer; text-transform: uppercase; }
+    .bank-card { background: #000; border: 1px solid var(--gold); padding: 20px; border-radius: 8px; margin-top: 10px; }
+    .info-row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 13px; }
+    .copy-badge { font-size: 10px; background: rgba(212, 175, 55, 0.1); color: var(--gold); padding: 4px 8px; border-radius: 4px; cursor: pointer; }
+    .bottom-nav { position: fixed; bottom: 0; width: 100%; background: #000; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid var(--gold); z-index: 200; }
+    .nav-item { color: var(--text-dim); text-decoration: none; font-size: 10px; text-align: center; cursor: pointer; transition: 0.2s; }
+    .nav-item.active { color: var(--gold); font-weight: bold; }
+    .chat-fab { position: fixed; bottom: 85px; right: 20px; background: var(--gold); width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.5); z-index: 150; cursor: pointer; }
+  </style>
+</head>
+<body>
+<div class="topbar"><div class="brand">Papyrus Hotel</div><div style="color: var(--gold)">🔱</div></div>
+<div class="container">
+  <div id="beds" class="tab-content active">
+    <div class="section-title">Luxury Suites</div>
+    <div class="card"><div><strong>Standard</strong></div><div class="price">5,000 ETB</div></div>
+    <div class="card"><div><strong>Presidential</strong></div><div class="price">100,000 ETB</div></div>
+    <div class="card" style="border: 1px solid var(--gold)"><div><strong>Diamond Wing</strong></div><div class="price">500,000 ETB</div></div>
+  </div>
+  <div id="deposit" class="tab-content">
+    <div class="section-title">Deposit Details</div>
+    <div class="bank-card">
+      <div class="info-row"><span>Payee</span><strong>Yitayal Habtamu</strong></div>
+      <div class="info-row"><span>Bank</span><strong>CBE</strong></div>
+      <div class="info-row"><span>Account</span><strong id="acc">1000181873764</strong></div>
+      <div style="text-align: right;"><span class="copy-badge" onclick="copyNum()">Copy Account Number</span></div>
+    </div>
+  </div>
+</div>
+<div class="bottom-nav">
+  <div class="nav-item active" onclick="switchTab('beds', this)">🛏️<br>Suites</div>
+  <div class="nav-item" onclick="switchTab('deposit', this)">💳<br>Deposit</div>
+</div>
+<div class="chat-fab" onclick="alert('Concierge Chat is connecting...')">💬</div>
+<script>
+  function switchTab(id, el) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    el.classList.add('active');
+  }
+  function copyNum() {
+    const num = document.getElementById('acc').innerText;
+    navigator.clipboard.writeText(num);
+    alert("Copied: " + num);
+  }
+  if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
+</script>
+</body>
+</html>
